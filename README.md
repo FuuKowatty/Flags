@@ -1,6 +1,6 @@
 <h1 style="text-align:center">FLAGS</h1>
 There is a Frontend Mentor challange
-[go](http://stackoverflow.com){:target="_blank"}.
+<p><a href='https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca'>Challange</a></p>
 
 <h2>On this page I used features such as:</h2>
 <p>-React</p>
