@@ -1,1 +1,1 @@
-<h1>FLAGS</h1>
+<h1 style='text-align: center'>FLAGS</h1>
