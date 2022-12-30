@@ -9,7 +9,10 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
 const BorderNeighbor = ({ neighbor }) => {
   return (
-    <span key={neighbor} className="p-2 border-2 dark:bg-dark-blue min-w-[80px] text-center">
+    <span
+      key={neighbor}
+      className="p-2 border-2 dark:bg-dark-blue min-w-[80px] text-center"
+    >
       {neighbor}
     </span>
   );
@@ -39,12 +42,14 @@ const Country = () => {
             key={country.name.common}
             className="grid xl:grid-cols-2 xl:mt-[80px] mt-5 dark:text-dark-mode-text xl:gap-24 items-center"
           >
-            <img
-              src={country.flags.svg}
-              alt={`flag-of-${country.name.common}`}
-              className="block flex-1 aspect-[160/140]"
-            />
-            <div className="grid xl:grid-rows-[1fr,2fr,1fr] grid-rows-[1fr,3fr,auto] items-center ">
+            <div className="xl:w-[600px] xl:h-[400px]">
+              <img
+                src={country.flags.svg}
+                alt={`flag-of-${country.name.common}`}
+                className="flex-1 w-[100%] h-[100%] object-cover"
+              />
+            </div>
+            <div className="grid xl:grid-rows-[1fr,3fr,auto] grid-rows-[1fr,3fr,auto] items-center ">
               <span className="font-bold text-2xl">{country.name.common}</span>
               <div className="flex xl:flex-row xl:gap-2 gap-10 flex-col justify-between leading-8">
                 <div>
@@ -78,12 +83,17 @@ const Country = () => {
                   </p>
                 </div>
               </div>
-              <span className="mt-10 font-bold">Border Countries:</span>{" "}
-              <div className="flex flex-wrap gap-1">
-   
-                {!country.borders ? <span>No Friends :( </span> : country.borders.map((neighbor) => (
-                  <BorderNeighbor neighbor={neighbor} />
-                ))}
+              <div>
+                <span className="mt-10 font-bold">Border Countries:</span>{" "}
+                <div className="flex flex-wrap gap-1">
+                  {!country.borders ? (
+                    <span>No Friends :( </span>
+                  ) : (
+                    country.borders.map((neighbor) => (
+                      <BorderNeighbor neighbor={neighbor} />
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           </div>

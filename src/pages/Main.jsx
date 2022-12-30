@@ -10,7 +10,7 @@ import Countries from "../components/Countries";
 const Main = () => {
 
     const [url, setUrl] = useState("https://restcountries.com/v3.1/all");
-    const { data, error, isPending, setData } = useFetch(url);
+    const { data, error, isPending } = useFetch(url);
     const [q, setQ] = useState("");
 
     const setFilter = (keywords) => {
@@ -18,7 +18,6 @@ const Main = () => {
       };
     
       const setRegion = (region) => {
-        setData(false);
         const url2 =
           region === "all"
             ? "https://restcountries.com/v3.1/all"
