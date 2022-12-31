@@ -1,17 +1,19 @@
-import React from "react";
+import { useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 //icons
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
-const BorderNeighbor = ({ neighbor }) => {
+const BorderNeighbor = ({ neighbor, onNeighbor }) => {
+
   return (
     <span
       key={neighbor}
-      className="p-2 border-2 dark:bg-dark-blue min-w-[80px] text-center"
+      className="p-2 border-2 dark:bg-dark-blue min-w-[80px] text-center cursor-pointer"
+      onClick={() => onNeighbor(neighbor)}
     >
       {neighbor}
     </span>
@@ -20,11 +22,16 @@ const BorderNeighbor = ({ neighbor }) => {
 
 const Country = () => {
   const { id } = useParams();
-  const url = "https://restcountries.com/v3.1/name/" + id;
+  const [url, setUrl] = useState("https://restcountries.com/v3.1/name/" + id)
   const { data, isPending, error } = useFetch(url);
   const navigate = useNavigate();
 
+  const loadNeighbor = (neighbor) => {
+    setUrl('https://restcountries.com/v3.1/alpha/' + neighbor)
+  }
+
   return (
+
     <div className="xl:w-[1280px] w-full px-8 my-12 sm:px-20 sm:my-15 xl:px-0 text-left">
       {isPending && <p>Loading...</p>}
       {error && <p>{error}</p>}
@@ -46,7 +53,7 @@ const Country = () => {
               <img
                 src={country.flags.svg}
                 alt={`flag-of-${country.name.common}`}
-                className="flex-1 w-[100%] h-[100%] object-cover"
+                className="flex-1 w-[100%] xl:h-[100%] object-cover xl:aspect-auto aspect-[7/5]"
               />
             </div>
             <div className="grid xl:grid-rows-[1fr,3fr,auto] grid-rows-[1fr,3fr,auto] items-center ">
@@ -90,7 +97,7 @@ const Country = () => {
                     <span>No Friends :( </span>
                   ) : (
                     country.borders.map((neighbor) => (
-                      <BorderNeighbor neighbor={neighbor} />
+                      <BorderNeighbor neighbor={neighbor} onNeighbor={loadNeighbor} />
                     ))
                   )}
                 </div>
@@ -111,5 +118,6 @@ function findLanguages(obj) {
   const languages = Object.values(obj);
   return languages.join(", ");
 }
+
 
 export default Country;
