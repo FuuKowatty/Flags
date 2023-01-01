@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-//icons
 import { HiMoon } from "react-icons/hi";
 
 const Navbar = ({ changeMode, mode }) => {

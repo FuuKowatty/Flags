@@ -1,11 +1,11 @@
 import {useState} from "react";
 
-//hooks
 import { useFetch } from "../hooks/useFetch";
 
 //components
 import UserPanel from "../components/UserPanel"
 import Countries from "../components/Countries";
+
 
 const Main = () => {
 

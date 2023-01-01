@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 
-//icons
 import { AiOutlineSearch } from "react-icons/ai";
+
+const ContinentsOptions = ['all' ,'Africa', 'America', 'Asia', 'Europe', 'Oceania']
 
 const UserPanel = ({setFilter, setRegion}) => {
   const focusOnInput = useRef(null);
@@ -33,12 +34,9 @@ const UserPanel = ({setFilter, setRegion}) => {
       </div>
       <div>
         <select className="sm:h-full h-[56px] White shadow-md px-5 dark:bg-dark-blue" onChange={(e) => handleRegion(e.target.value)}>
-          <option value="all">Filter by Region</option>
-          <option value="Africa">Africa</option>
-          <option value="America">America</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
+          {ContinentsOptions.map(option => (
+            <option key={option} value={option}>{option === 'all' ? 'Filter By Region' : option}</option>
+          ))}
         </select>
       </div>
     </div>

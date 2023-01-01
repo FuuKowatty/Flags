@@ -1,31 +1,38 @@
-//Zmieniaj linki w filtrach bo wtedy navigate dobrze cofa
-
 import { useEffect, useState } from "react";
 
 //components
 import Navbar from "./components/Navbar";
 import Main from "./pages/Main";
 import Country from "./pages/Country";
-//styles
+
 import "./App.css";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-
 
 function App() {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    if (theme === "dark") {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      changeMode()
+    }
+  }, [])
+
+  useEffect(() => {
+    if(theme === 'dark') {
       document.documentElement.style.background = "hsl(207, 26%, 17%)";
-    } else {
+      localStorage.theme = 'dark'
+    }
+    else if(theme === 'light') {
       document.documentElement.style.background = "hsl(0, 0%, 98%)";
+      localStorage.theme = 'light'
     }
   }, [theme]);
 
   const changeMode = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
 
   return (
     <div

@@ -1,6 +1,5 @@
 import React from "react";
 
-//router
 import { Link } from "react-router-dom";
 
 const Country = ({ country }) => {

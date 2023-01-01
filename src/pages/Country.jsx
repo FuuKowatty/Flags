@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
-//icons
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+
+import {findCurrency, findLanguages} from '../components/utilits'
 
 const BorderNeighbor = ({ neighbor, onNeighbor }) => {
 
@@ -21,13 +22,18 @@ const BorderNeighbor = ({ neighbor, onNeighbor }) => {
 };
 
 const Country = () => {
+  
   const { id } = useParams();
-  const [url, setUrl] = useState("https://restcountries.com/v3.1/name/" + id)
+  const [url] = useState("https://restcountries.com/v3.1/name/" + id)
   const { data, isPending, error } = useFetch(url);
+
   const navigate = useNavigate();
 
-  const loadNeighbor = (neighbor) => {
-    setUrl('https://restcountries.com/v3.1/alpha/' + neighbor)
+  const loadNeighbor = async (neighbor) => {
+    const url2 = await fetch('https://restcountries.com/v3.1/alpha/' + neighbor)
+    const json = await url2.json()
+    navigate(`/name/${json[0].name.common}`)
+    location.reload()
   }
 
   return (
@@ -38,7 +44,9 @@ const Country = () => {
       {data && (
         <button
           className="flex items-center py-1 px-6 gap-2 dark:text-dark-mode-text shadow-[0px_0px_5px_0px_rgba(66,68,90,1)] shadow-black dark:bg-dark-blue"
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            navigate('/')
+         }}
         >
           <HiOutlineArrowNarrowLeft /> Back
         </button>
@@ -109,15 +117,6 @@ const Country = () => {
   );
 };
 
-function findCurrency(obj) {
-  const mainObj = Object.keys(obj)[0];
-  return obj[mainObj].name;
-}
-
-function findLanguages(obj) {
-  const languages = Object.values(obj);
-  return languages.join(", ");
-}
 
 
 export default Country;
