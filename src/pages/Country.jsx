@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
-import {findCurrency, findLanguages} from '../components/utilits'
+import {findCurrency, findLanguages} from '../utilits'
 
 const BorderNeighbor = ({ neighbor, onNeighbor }) => {
 
